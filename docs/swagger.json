@@ -1,0 +1,105 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Simple APIs for a To-Do app.",
+        "title": "To-Do API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/todo": {
+            "get": {
+                "tags": [
+                    "To-Do"
+                ],
+                "summary": "Get the To_Do list.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/api.todoDto"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "To-Do"
+                ],
+                "summary": "Create a To-Do item.",
+                "parameters": [
+                    {
+                        "description": "Create To-Do item payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.createTodoRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/api.todoDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/todo/:id/check": {
+            "put": {
+                "tags": [
+                    "To-Do"
+                ],
+                "summary": "Check a To-Do item.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/todo/:id/uncheck": {
+            "put": {
+                "tags": [
+                    "To-Do"
+                ],
+                "summary": "Uncheck a To-Do item.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.createTodoRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.todoDto": {
+            "type": "object",
+            "properties": {
+                "complete": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "task": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

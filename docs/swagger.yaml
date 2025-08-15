@@ -1,0 +1,66 @@
+definitions:
+  api.createTodoRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  api.todoDto:
+    properties:
+      complete:
+        type: boolean
+      id:
+        type: integer
+      task:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Simple APIs for a To-Do app.
+  title: To-Do API
+  version: "1.0"
+paths:
+  /todo:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/api.todoDto'
+            type: array
+      summary: Get the To_Do list.
+      tags:
+      - To-Do
+    post:
+      parameters:
+      - description: Create To-Do item payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/api.createTodoRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/api.todoDto'
+      summary: Create a To-Do item.
+      tags:
+      - To-Do
+  /todo/:id/check:
+    put:
+      responses:
+        "200":
+          description: OK
+      summary: Check a To-Do item.
+      tags:
+      - To-Do
+  /todo/:id/uncheck:
+    put:
+      responses:
+        "200":
+          description: OK
+      summary: Uncheck a To-Do item.
+      tags:
+      - To-Do
+swagger: "2.0"
